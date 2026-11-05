@@ -4,3 +4,290 @@
 @media(max-width:800px){.hero{min-height:580px;padding-top:90px}.sun{width:80px;height:80px;right:4%;top:10%}.route-line i{width:12px}.section{padding:70px 0}.quick-card{grid-column:span 6}.stay-card{grid-column:span 4}.drive-card{grid-column:span 5}.weather-card{grid-column:span 3}.tips-grid{grid-template-columns:repeat(2,1fr)}.checklist{grid-template-columns:1fr}.split-heading,.day-header{align-items:start;flex-direction:column}.day-header>p{text-align:left;margin:0}.hotel{grid-template-columns:1fr}.hotel small{margin-top:-12px}}
 @media(max-width:560px){.hero{min-height:530px;padding:70px 18px 125px}h1{font-size:3.35rem}.hero-sub{font-size:.95rem;line-height:1.7}.date-badge{gap:7px;padding:7px 11px}.date-badge strong{font-size:.88rem}.route-line{margin-top:34px;gap:5px}.route-line i{display:none}.route-line span{background:rgba(255,255,255,.28);border-radius:999px;padding:3px 7px}.section{width:calc(100% - 28px);padding:60px 0}.quick-grid{gap:10px}.quick-card,.stay-card,.drive-card,.weather-card{grid-column:span 12;min-height:auto;padding:20px}.itinerary{width:100%;padding-left:14px;padding-right:14px}.day-tabs{margin:0 -14px;padding:8px 14px;overflow-x:auto;grid-template-columns:repeat(5,82px);scrollbar-width:none}.day-tab{padding:9px 5px}.day-tab small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.day-header{margin-top:35px}.timeline{margin-left:66px}.timeline article{padding-left:30px;min-height:110px}.timeline time{left:-67px;font-size:.88rem}.timeline p{font-size:.84rem}.hotel{padding:20px}.tips-grid{grid-template-columns:1fr}.tips-grid article{min-height:auto}.checklist{padding:22px}.checklist ul{grid-template-columns:repeat(2,1fr)}.emergency{align-items:start;flex-direction:column;gap:2px}.emergency a{margin:8px 0 0}.cloud{display:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
+/* ==================== 行李打包清單樣式 (Okinawa Blue 主題) ==================== */
+:root {
+  --pk-primary: #0284c7;       /* 沖繩海洋深藍 */
+  --pk-primary-light: #e0f2fe; /* 浪花淺藍 */
+  --pk-accent: #0ea5e9;        /* 清澈亮藍 */
+  --pk-bg-card: #ffffff;
+  --pk-text-main: #1e293b;
+  --pk-text-muted: #94a3b8;
+  --pk-border: #e2e8f0;
+  --pk-danger: #ef4444;
+  --pk-radius: 16px;
+}
+
+.pk-container {
+  max-width: 1080px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+  color: var(--pk-text-main);
+}
+
+.pk-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.pk-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--pk-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.pk-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* 儀表板與進度條 */
+.pk-dashboard {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  border: 1px solid #bae6fd;
+  border-radius: var(--pk-radius);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.06);
+}
+
+.pk-stats-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.pk-progress-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.pk-progress-label {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #0369a1;
+}
+
+.pk-stats-text {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--pk-primary);
+  background: #ffffff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.pk-reset-btn {
+  background: #ffffff;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 40px;
+}
+
+.pk-reset-btn:hover,
+.pk-reset-btn:active {
+  background: #fef2f2;
+  color: var(--pk-danger);
+  border-color: #fecaca;
+}
+
+.pk-progress-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.pk-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pk-accent), var(--pk-primary));
+  border-radius: 999px;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 快速篩選頁籤 (支援手機橫向滑動) */
+.pk-tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pk-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.pk-tab-btn {
+  flex: 0 0 auto;
+  background: #f8fafc;
+  color: #475569;
+  border: 1px solid var(--pk-border);
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 42px;
+}
+
+.pk-tab-btn.active {
+  background: var(--pk-primary);
+  color: #ffffff;
+  border-color: var(--pk-primary);
+  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+}
+
+/* 分類卡片網格：手機預設單欄，平板/電腦自動多欄 */
+.pk-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .pk-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .pk-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pk-card {
+  background: var(--pk-bg-card);
+  border: 1px solid var(--pk-border);
+  border-radius: var(--pk-radius);
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.pk-card-important {
+  border: 2px solid #38bdf8;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 35%);
+}
+
+.pk-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.pk-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pk-badge-important {
+  font-size: 0.72rem;
+  background: #fef3c7;
+  color: #b45309;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.pk-card-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}
+
+/* 品項列表與單手大範圍觸控區 */
+.pk-item-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pk-item-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.65rem; /* 加大觸控範圍，適合手機單手點按 */
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.pk-item-label:hover {
+  background-color: #f8fafc;
+}
+
+.pk-item-label:active {
+  background-color: #e0f2fe;
+}
+
+.pk-checkbox {
+  width: 1.35rem;
+  height: 1.35rem;
+  accent-color: var(--pk-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.pk-item-text {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--pk-text-main);
+  transition: color 0.2s ease;
+}
+
+/* 勾選完成狀態：刪除線 + 變淺色 */
+.pk-item-label.checked .pk-item-text {
+  text-decoration: line-through;
+  color: var(--pk-text-muted);
+}
+
+.pk-subtag {
+  font-size: 0.75rem;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  margin-right: 0.35rem;
+  font-weight: 600;
+}
+
+.pk-item-label.checked .pk-subtag {
+  background: #f1f5f9;
+  color: var(--pk-text-muted);
+}
