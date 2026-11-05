@@ -144,6 +144,40 @@
       </div>
     </section>
 
+    <!-- ==================== 互動式行李打包清單區塊 ==================== -->
+    <section id="packing-section" class="pk-container">
+      <div class="pk-header">
+        <h2 class="pk-title">🧳 沖繩之旅・行李打包清單</h2>
+        <p class="pk-subtitle">點擊品項即可打勾，系統會自動幫你記住進度喔！</p>
+      </div>
+    
+      <!-- 進度統計儀表板 -->
+      <div class="pk-dashboard">
+        <div class="pk-stats-row">
+          <div class="pk-progress-info">
+            <span class="pk-progress-label">打包進度</span>
+            <span id="pk-stats-text" class="pk-stats-text">已完成 0 / 54 (0%)</span>
+          </div>
+          <button id="pk-reset-btn" class="pk-reset-btn" type="button" aria-label="全部重置">
+            🔄 全部重置
+          </button>
+        </div>
+        <div class="pk-progress-track">
+          <div id="pk-progress-bar" class="pk-progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+    
+      <!-- 快速篩選頁籤 (Tabs) -->
+      <div id="pk-tabs" class="pk-tabs" role="tablist">
+        <!-- 由 JavaScript 自動產生分類頁籤 -->
+      </div>
+    
+      <!-- 分類卡片網格 (Grid/Cards) -->
+      <div id="pk-grid" class="pk-grid">
+        <!-- 由 JavaScript 自動渲染 7 大類與 54 個品項 -->
+      </div>
+    </section>
+
     <section class="section practical" aria-labelledby="tips-title">
       <div class="section-heading"><p class="kicker">TRAVEL NOTES</p><h2 id="tips-title">出發前，記住這些</h2></div>
       <div class="tips-grid">
